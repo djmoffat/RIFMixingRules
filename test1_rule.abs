@@ -1,0 +1,28 @@
+Prefix : <http://www.w3.org/2007/rif#> .
+Prefix prd: <http://www.w3.org/2007/rif#> .
+Prefix dmo: <http://www.example.org/dmo#> .
+Prefix aufo: <https://w3id.org/aufx/ontology/1.0#> .
+Prefix afo: <https://w3id.org/afo/onto/1.1#> .
+Prefix st: <http://www.w3.org/2007/rif#> .
+
+Group(
+  Forall ?track ?centroid ?pan(
+    If(
+      And(
+        :type(?track dmo:dmo)
+        :hasFeature(?track ?centroid)
+        :type(?centroid afo:spectralCentroid)
+        :type(?pan aufo:pan)
+        :hasParameter(?track ?pan)
+      )
+    )
+    Then(
+      If( External(pred:numeric-greater-than(?centroid 0.5))
+        Modify(:value ?pan 0)
+      )
+      If( External(pred:numeric-less-than(?centroid 0.5))
+        Modify(:value ?pan 1)
+      )
+    )
+  )
+)
