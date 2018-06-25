@@ -8,7 +8,7 @@ Document(
 
   Group(
     Forall ?track ?centroid ?pan(
-      If(
+      If 
         And(
           :type(?track dmo:dmo)
           :hasFeature(?track ?centroid)
@@ -16,14 +16,15 @@ Document(
           :type(?pan aufo:pan)
           :hasParameter(?track ?pan)
         )
-      )
-      Then(
-        If( External(pred:numeric-greater-than(?centroid 0.5))
+      Then 
+        If
+          External(pred:numeric-greater-than(?centroid 0.5)
+        Then
           Modify(:value ?pan 0)
-        )
-        If( External(pred:numeric-less-than(?centroid 0.5))
+        If
+          External(pred:numeric-less-than(?centroid 0.5)
+        Then
           Modify(:value ?pan 1)
-        )
       )
     )
   )
