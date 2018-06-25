@@ -1,0 +1,86 @@
+
+@prefix : <http://www.w3.org/2007/rif#>.
+@prefix :prd <http://www.w3.org/2007/rif#>.
+@prefix :dmo <http://www.example.org/dmo#>.
+@prefix :aufo <https://w3id.org/aufx/ontology/1.0#>.
+@prefix :afv <https://w3id.org/afo/vocab/1.1#>.
+@prefix :st <http://www.w3.org/2007/rif#>.
+@prefix :xs <http://www.w3.org/2001/XMLSchema>
+
+
+<http://example.com/testRule> a :Group ;
+  :sentences (
+    [ a :Forall ;
+      :vars ([a :Var ; :varname "track"] [a :Var ; :varname "centroid"] [a :Var ; :varname "pan"])
+      :formula 
+        [ a :Implies ;
+          :if 
+            [ a :And ; 
+              :formulas(
+                 [ a :Atom ;(
+                   :args(
+                    [a :Var ; :varname "track"]
+                    [a :Const ; :constIRI "http://www.tiny.cc/dymo-ontology#Dymo"]
+                   )
+                   :op [
+                    :a :Const ; :constIRI "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"]
+                   )]
+                 [ a :Atom ;(
+                   :args(
+                    [a :Var ; :varname "centroid"]
+                    [a :Const ; :constIRI "https://w3id.org/afo/vocab/1.1#Centroid"]
+                   )
+                   :op [
+                    :a :Const ; :constIRI "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"]
+                   )]
+                [ a :Atom ;(
+                   :args(
+                    [a :Var ; :varname "pan"]
+                    [a :Const ; :constIRI "http://www.tiny.cc/dymo-ontology#Pan"]
+                   )
+                   :op [
+                    :a :Const ; :constIRI "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"]
+                   )]
+               [ a :Atom ;(
+                   :args(
+                    [a :Var ; :varname "track"]
+                    [a :Var ; :varname "centroid"]
+                   )
+                   :op [
+                    :a :Const ; :constIRI "http://www.tiny.cc/dymo-ontology#hasFeature"]
+                   )]
+               [ a :Atom ;(
+                   :args(
+                    [a :Var ; :varname "track"]
+                    [a :Var ; :varname "pan"]
+                   )
+                   :op [
+                    :a :Const ; :constIRI "http://www.tiny.cc/dymo-ontology#hasParameter"]
+                   )]
+                [ a :Atom ;(
+                   :args(
+                    [a :Var ; :varname "centroid"]
+                    [a :Const ; :value "0.5"^^xs:float]
+                   )
+                   :op [
+                    :a :Const ; :constIRI "http://www.w3.org/2007/rif-builtin-predicate#numeric-greater-than"]
+                   )]
+              )
+            :then [ 
+              :do[
+                a :Modify
+                  [ a :Atom ;(
+                     :args(
+                      [a :Var ; :varname "pan"]
+                      [a :Const ; :value "0.0"^^xs:float]
+                     )
+                     :op [
+                      :a :Const ; :constIRI "http://www.tiny.cc/dymo-ontology#value"]
+                     )]
+              ]
+            ]
+          ] 
+      ]
+    ]
+  )
+
