@@ -22,3 +22,5 @@ g.add( (r, RDFS.type, Forall) )
 g.add( (r, RDFS.type, Forall) )
 
 ...
+
+print g.serialize(format='n3')
